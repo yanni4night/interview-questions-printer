@@ -6,13 +6,28 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
+var question = require('./routes/question');
+
+var config = require('./config');
+var swig = require('swig');
+var fs = require('fs');
 
 var app = express();
 
+swig.setDefaults({
+  cache: false,
+  loader: swig.loaders.fs(__dirname + '/views')
+});
+
+swig.setFilter('length', function (input, len) {
+  return input.length>len?input.slice(0,len):input;
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hjs');
+app.engine('tpl', swig.renderFile);
+app.set('view engine', 'tpl');
 
 app.use(favicon());
 app.use(logger('dev'));
@@ -26,19 +41,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Be user to be logined
 app.use('*', function(req, res, next) {
     var err, username;
+
+    if ('ufo' === req.host || '10.11.202.231' === req.host) {
+        return res.redirect(req.protocol + '://' + config.host + ':' + (app.get('port') || 80) + req.path);
+    }
+
     //jpassport-sp  {username:yinyong@sogou-inc.com,timebefore:2014-07-25T11:07:10.705Z,notonorafter:2014-08-08T11:08:10.705Z,sign:eJwNj8kRADEIw1oCcz8DCf2XtPvzQyON2bfvWps9hDyXp7C0113oKqvrsOm00ZD2emTHFcpi5naC5KZEIN0KB2j6QVCdtVc7/GCQuPf2zNXcdrQeD1nNE5XKS6ggpN1lOuKPljpdjfbfsjF/HHyn0TlMRFveIkhpDk29MhhzKDos9rym+hvN84b1Wgxx/1KnwujsGh0d1f+28AfgpTmM}    ufo.sogou-inc.com   /   连线时段    336 B       
     if (!req.cookies['jpassport-sp']) {
-        err = new Error('Not logined');
+        err = new Error('Not Logined');
         err.status = 500;
         next(err);
     } else {
-        username = req.cookies['jpassport-sp'].match(/username:([^,@]+)/)[1];
+        username = (req.cookies['jpassport-sp'].match(/username:([^,@]+)/) || [null, 'anonymous'])[1];
         req.username = username;
         next();
     }
 });
 app.use('/', routes);
-app.use('/users', users);
+app.use('/user', user);
+app.use('/question', question);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
