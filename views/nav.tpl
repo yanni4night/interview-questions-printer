@@ -54,7 +54,7 @@
             <div class="element input-element">
                 <form action="/question/search" autocomplete="off" disableautocomplete>
                     <div class="input-control text">
-                        <input type="text" name="key" placeholder="Search..." value="">
+                        <input type="text" name="key" placeholder="Search..." value="{{key}}">
                         <button class="btn-search"></button>
                     </div>
                 </form>

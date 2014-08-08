@@ -36,6 +36,38 @@ router.get('/create', function(req, res) {
     return res.render('question/create', tplData(req));
 });
 
+router.get('/search', function(req, res, next) {
+    var key = req.param('key'),
+        keys, reg;
+    if (!key) {
+        return res.redirect('/question/list');
+    }
+
+    keys = key.split(/\s+/g);
+    reg = new RegExp(keys.map(function(key, idx) {
+        return key.replace(/(\$|\?|\+|\*|\||\^|\(|\)|\[|\]|\{|\}|\.|\\)/mg, '\\$1')
+    }).join('|'), 'img');
+
+    Question.find({}).or([{
+        name: reg
+    }, {
+        content: reg
+    }]).exec(
+        function(err, ques) {
+            if (err) {
+                (err || (err = new Error('Nothing found'))).status = 500;
+                return next(err);
+            }
+            return res.render('question/list', tplData(req, {
+                questions: ques,
+                key: key
+            }));
+        }
+    );
+
+
+});
+
 router.get('/show/:id', function(req, res, next) {
     var id = req.param('id'),
         err;
@@ -85,8 +117,8 @@ router.get('/list', function(req, res) {
 //ajax
 router.post('/save', function(req, res) {
 
-    var name = req.body.name;
-    var content = req.body.content;
+    var name = (req.body.name || "").trim();
+    var content = (req.body.content || "").trim();
     var id = req.body.id;
 
     if (!name || !content) {
