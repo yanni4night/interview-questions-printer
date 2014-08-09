@@ -12,7 +12,10 @@
                 if(stared)return;
                 stared = true;
                 rating.rate(value);
-                $.post(action,{value:value});
+                $.post(action,{value:value})
+                    .complete(function(){
+                        
+                    });
             }
         }).attr('data-xaction');
    
@@ -23,7 +26,7 @@
 
 {%block content%}
     <h1>{{question.name}}</h1>
-    <h5>{{question.tags}}</h5>
+    <h5>Tags:{{question.tags}}</h5>
     <article class="margin20 nlm nrm padding20 ribbed-grayDarker fg-white">{{question.content}}
     </article>
 

@@ -3,7 +3,7 @@
 {%block content%}
 <div class="listview-outlook"  style="margin-top: 20px">
                 <div class="list-group">
-                    <a href="#" class="group-title">Today</a>
+                    <a href="#" class="group-title">All the questions</a>
                     <div class="group-content" style="display: block;">
                         <!-- <a class="list marked" href="#">
                             <div class="list-content">

@@ -33,6 +33,16 @@ router.get('/', function(req, res) {
 
 });
 
+router.post('/listAll', function(req, res) {
+    Question.find({}, function(err, ques) {
+        if (!err) {
+            return res.json(ques);
+        } else {
+            return res.json(Codes.OPERATION_FAILED(err.message));
+        }
+    });
+});
+
 router.get('/create', function(req, res) {
     return res.render('question/create', tplData(req));
 });
@@ -85,9 +95,7 @@ router.get('/show/:id', function(req, res, next) {
                 ques.rate = Math.round(ques.stars.reduce(function(p, n) {
                     return p.value + n.value;
                 }) / ques.stars.length);
-            } else {
-                1 === ques.stars.length
-            } {
+            } else if (1 === ques.stars.length) {
                 ques.rate = ques.stars[0].value;
             }
 
