@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var user = require('./routes/user');
 var question = require('./routes/question');
+var test = require('./routes/test');
 
 var config = require('./config');
 var swig = require('swig');
@@ -60,6 +61,7 @@ app.use('*', function(req, res, next) {
 app.use('/', routes);
 app.use('/user', user);
 app.use('/question', question);
+app.use('/test', test);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

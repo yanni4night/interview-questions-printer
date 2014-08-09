@@ -13,17 +13,17 @@
 var mongoose = require('./mongoose');
 
 var Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId,
-    Mixed = Schema.Types.Mixed;
+    ObjectId = Schema.ObjectId;
 
 var questionSchema = new Schema({
     qid: ObjectId,
     name: String,
-    author:String,
+    author: String,
     content: String,
     date: Date,
     comments: Array,
-    stars:Array
+    stars: Array,
+    tags: String
 });
 
 module.exports = mongoose.model('Question', questionSchema);

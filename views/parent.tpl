@@ -6,6 +6,7 @@
     <link rel='stylesheet' href='/stylesheets/metro-bootstrap.css' />
     <link rel='stylesheet' href='/stylesheets/metro-bootstrap-responsive.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    {%block link%}{%endblock%}
   </head>
   <body class="metro">
     {%include "nav.tpl"%}
@@ -16,4 +17,5 @@
   <script src="/javascripts/jquery.min.js"></script>
   <script src="/javascripts/jquery.widget.min.js"></script>
   <script src="/javascripts/metro.min.js"></script>
+  {%block script%}{%endblock%}
 </html>

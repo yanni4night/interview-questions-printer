@@ -1,7 +1,19 @@
 {%extends "parent.tpl"%}
 
 
-{%block title%}{%if id%}Update{%else%}Create{%endif%} Question{%endblock%}
+{%block title%}{%if question.id%}Update{%else%}Create{%endif%} Question{%endblock%}
+
+
+{%block link%}
+<link rel="stylesheet" href="/stylesheets/jquery.tagsinput.css">
+{%endblock%}
+{%block script%}
+<script src="/javascripts/jquery.tagsinput.js"></script>
+<script>
+    $('#tags').tagsInput();
+</script>
+{%endblock%}
+
 {%block content%}
 <form action="/question/save" method="post" autocomplete="off" disableautocomplete>
     {%if errmsg%}
@@ -12,20 +24,26 @@
     </div>
     {%endif%}
     <fieldset>
-        <legend>{%if id%}Update{%else%}Create{%endif%} a new question</legend>
+        <legend>{%if question.id%}Update{%else%}Create{%endif%} a new question</legend>
         <label>Name</label>
         <div class="input-control text info-state" data-role="input-control">
-            <input type="text" placeholder="type the title of the question" name="name" value="{{name|safe}}"/>
+            <input type="text" placeholder="type the title of the question" name="name" value="{{question.name|safe}}"/>
             <button class="btn-clear" tabindex="-1" type="button"></button>
         </div>
-        <input type="hidden" name="id" value="{{id}}"/>
+        <input type="hidden" name="id" value="{{question.id}}"/>
         <label>Content</label>
         <!--  <div class="input-control password" data-role="input-control">
             <input type="password" placeholder="type the content" name="body" autofocus="">
             <button class="btn-reveal" tabindex="-1" type="button"></button>
         </div> -->
         <div class="input-control textarea info-state" data-role="input-control">
-            <textarea name="content" class="body" placeholder="type the content of the question">{{content|safe}}</textarea>
+            <textarea name="content" class="body" placeholder="type the content of the question">{{question.content}}</textarea>
+        </div>
+
+        <label>Tags</label>
+        <div class="input-control text info-state" data-role="input-control">
+            <input type="text" placeholder="" id="tags" name="tags" value="{{question.tags}}"/>
+            <button class="btn-clear" tabindex="-1" type="button"></button>
         </div>
         <!-- <div class="input-control text" data-role="input-control">
             <input type="text">
@@ -114,7 +132,7 @@
                 </label>
             </div>
         </div> -->
-        <input type="submit" value="{%if id%}Update{%else%}Create{%endif%}"/>
+        <input type="submit" value="{%if question.id%}Update{%else%}Create{%endif%}"/>
         <input type="reset" value="Reset"/>
         <!-- <input type="button" value="Button"> -->
     </fieldset>

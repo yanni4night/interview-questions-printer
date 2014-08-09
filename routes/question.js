@@ -10,6 +10,7 @@
  * @since 0.1.0
  */
 var express = require('express');
+var extend = require('extend');
 var router = express.Router();
 
 
@@ -52,6 +53,8 @@ router.get('/search', function(req, res, next) {
         name: reg
     }, {
         content: reg
+    }, {
+        tags: reg
     }]).exec(
         function(err, ques) {
             if (err) {
@@ -92,9 +95,7 @@ router.get('/edit/:id', function(req, res, next) {
             return next(err);
         } else {
             return res.render('question/create', tplData(req, {
-                content: ques.content,
-                name: ques.name,
-                id: ques.id
+                question: ques
             }));
         }
     });
@@ -119,31 +120,34 @@ router.post('/save', function(req, res) {
 
     var name = (req.body.name || "").trim();
     var content = (req.body.content || "").trim();
+    var tags = (req.body.tags || "").trim();
     var id = req.body.id;
+
+    var update = {
+        content: content,
+        name: name,
+        tags: tags,
+        author: req.username,
+        date: new Date()
+    };
+    var obj = extend({
+        id: id
+    }, update);
 
     if (!name || !content) {
         return res.render('question/create', tplData(req, {
-            content: content,
-            name: name,
-            id: id,
+
+            question: obj,
             errmsg: 'Parameter(s) required '
         }));
     }
 
     if (id) {
-        return Question.findByIdAndUpdate(id, {
-            name: name,
-            content: content,
-            author: req.username,
-            date: new Date()
-        }, function(err, ques) {
+        return Question.findByIdAndUpdate(id, update, function(err, ques) {
             if (err && !ques) {
                 return res.render('question/create', tplData(req, {
-                    content: content,
-                    name: name,
-                    id: id,
+                    question: obj,
                     errmsg: err.message
-
                 }));
             } else {
                 return res.redirect('/question/show/' + ques.id);
@@ -152,16 +156,13 @@ router.post('/save', function(req, res) {
     }
 
     var ques = new Question();
-    ques.name = name;
-    ques.content = content;
-    ques.author = req.username;
-    ques.date = new Date();
+
+    extend(ques, update);
 
     return ques.save(function(err, ques) {
         if (err && !ques) {
             return res.render('question/create', tplData(req, {
-                content: content,
-                name: name,
+                question: obj,
                 errmsg: err.message
 
             }));
