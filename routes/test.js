@@ -112,6 +112,7 @@ router.get('/show/:id', function(req, res, next) {
             },function(err,ques){
                 return res.render('test/show',tplData(req,{
                     test:test,
+                    _ques_test:true,
                     questions:(ques||[]).filter(function(q){
                         return ~qids.indexOf(q.id)
                     })

@@ -1,5 +1,5 @@
 {%extends "parent.tpl"%}
-{%block title%}Question{%endblock%}
+{%block title%}{{question.name}}{%endblock%}
 
 
 {%block script%}

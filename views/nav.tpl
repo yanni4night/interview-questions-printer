@@ -49,6 +49,10 @@
             <!-- <a class="element brand" href="#"><span class="icon-spin"></span></a>-->
             {%if _ques_show%}
             <a class="element brand" href="/question/edit/{{question.id}}"><span class="icon-code" title="Update this question"></span></a>
+            {%endif%}
+            {%if _ques_test%}
+             <a class="element brand" href="/test/edit/{{question.id}}"><span class="icon-code" title="Update this test"></span></a>
+            <a class="element brand" href="/test/print/{{question.id}}"><span class="icon-printer" title="Print this test"></span></a>
             {%endif%} 
             <span class="element-divider"></span>
             <div class="element input-element">
