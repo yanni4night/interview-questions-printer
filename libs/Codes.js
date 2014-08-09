@@ -13,19 +13,25 @@ module.exports = {
     PARAMETER_REQUIRED: function() {
         return {
             code: -0x0810,
-            msg: '参数不足'
+            msg: 'Lack of parameter(s)'
+        };
+    },
+    PARAMETER_WRONG: function() {
+        return {
+            code: -0x0811,
+            msg: 'Wrong parameter(s)'
         };
     },
     OPERATION_FAILED: function(msg) {
         return {
             code: -1,
-            msg: msg || '操作失败'
+            msg: msg || 'Operation failed'
         };
     },
     OPERATION_SUCCEED: function(msg) {
         return {
             code: 0,
-            msg: msg || '操作成功'
+            msg: msg || 'Operation succeed'
         };
     }
 };

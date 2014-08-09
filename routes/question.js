@@ -79,8 +79,23 @@ router.get('/show/:id', function(req, res, next) {
             (err || (err = new Error('Question Not Found'))).status = 404;
             return next(err);
         } else {
+
+            !Array.isArray(ques.stars) && (ques.stars = []);
+            if (ques.stars.length > 1) {
+                ques.rate = Math.round(ques.stars.reduce(function(p, n) {
+                    return p.value + n.value;
+                }) / ques.stars.length);
+            } else {
+                1 === ques.stars.length
+            } {
+                ques.rate = ques.stars[0].value;
+            }
+
             return res.render('question/show', tplData(req, {
                 question: ques,
+                stared: ques.stars.some(function(star) {
+                    return star.author = req.username;
+                }),
                 _ques_show: true
             }));
         }
@@ -170,6 +185,40 @@ router.post('/save', function(req, res) {
             return res.redirect('/question/show/' + ques.id);
         }
         //return res.json(err ? Codes.OPERATION_FAILED() : Codes.OPERATION_SUCCEED());
+    });
+});
+
+
+router.post('/star/:id', function(req, res) {
+    var id = req.param('id');
+    var value = +req.param('value');
+
+    if (isNaN(value) || !isFinite(value) || value < 0 || value > 5) {
+        return res.json(Codes.PARAMETER_WRONG());
+    }
+
+    return Question.findById(id, function(err, ques) {
+        if (err || !ques) {
+            return res.json(Codes.OPERATION_FAILED(err && err.message));;
+        } else {
+            !Array.isArray(ques.stars) && (ques.stars = []);
+            if (!ques.stars.some(function(star) {
+                return star.author === req.username;
+            })) {
+                ques.stars.push({
+                    value: value,
+                    author: req.username
+                });
+
+                return Question.findByIdAndUpdate(id, {
+                    stars: ques.stars
+                }, function(err, que) {
+                    //ignore error
+                    return res.json(Codes.OPERATION_SUCCEED());
+                });
+            }
+            return res.json(Codes.OPERATION_FAILED('Dumplicated star'))
+        }
     });
 });
 
