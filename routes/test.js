@@ -14,6 +14,7 @@ var express = require('express');
 var router = express.Router();
 
 
+var Question = require('../libs/MQuestion');
 var Test = require('../libs/MTest');
 var Codes = require('../libs/Codes');
 var tplData = require('../libs/tplData');
@@ -98,7 +99,26 @@ router.get('/update/:id', function(req, res, next) {
 });
 
 router.get('/show/:id', function(req, res, next) {
-
+    var id = req.param('id');
+    return Test.findById(id,function(err,test){
+        if(err){
+            err.status = 404;
+            return next(err);
+        }else{
+            var qids = (test.questions||"").split(',');
+            //FIXME
+            return Question.find({
+               // _id: new RegExp(qids.replace(',','|'),'mg')
+            },function(err,ques){
+                return res.render('test/show',tplData(req,{
+                    test:test,
+                    questions:(ques||[]).filter(function(q){
+                        return ~qids.indexOf(q.id)
+                    })
+                }));
+            })
+        }
+    });
 });
 
 module.exports = router;
