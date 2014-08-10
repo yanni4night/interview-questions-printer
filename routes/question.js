@@ -20,17 +20,7 @@ var Codes = require('../libs/Codes');
 var tplData = require('../libs/tplData');
 
 router.get('/', function(req, res) {
-
-    Question.find({}, function(err, ques) {
-
-        if (!err) {
-            return res.json(ques);
-        } else {
-            return res.send(err);
-        }
-    });
-
-
+    return res.redirect('/question/list');
 });
 
 router.post('/listAll', function(req, res) {

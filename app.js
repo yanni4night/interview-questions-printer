@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var user = require('./routes/user');
 var question = require('./routes/question');
 var test = require('./routes/test');
+var tplData = require('./libs/tplData');
 
 var config = require('./config');
 var swig = require('swig');
@@ -58,6 +59,9 @@ app.use('/', routes);
 app.use('/user', user);
 app.use('/question', question);
 app.use('/test', test);
+app.use('/help', function(req,res){
+    return res.render('help',tplData(req));
+});
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,6 +1,6 @@
 <nav class="navigation-bar dark">
     <div class="navigation-bar-content">
-        <a href="/" class="element"><span class="icon-grid-view"></span> VIEW TOUCH <sup>1.0beta</sup></a>
+        <a href="/" class="element"><span class="icon-grid-view"></span> VIEW TOUCH <sup>1.0&beta;</sup></a>
         <span class="element-divider"></span>
         <a class="pull-menu" href="#"></a>
         <ul class="element-menu">
