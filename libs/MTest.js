@@ -20,7 +20,7 @@ var testSchema = new Schema({
     author: String,
     questions: String,
     date: Date,
-    stars: String,
+    stars: Array,
     tags: String
 });
 

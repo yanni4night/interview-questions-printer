@@ -29,19 +29,18 @@
     <h5>Tags:{{test.tags}}</h5>
     {%for q in questions%}
     <article class="margin20 nlm nrm padding20 ribbed-grayDarker fg-white">    {{q.name}}
-        
+
         {{q.content}}
     </article>
     {%endfor%}
 
-    <div class="rating large active fg-dark" data-static="{{stared}}" data-score="{{question.rate|default(0)}}" data-stars="5" data-role="rating" data-show-score="true" data-score-hint="{%if stared%}You have stared,rating: {%else%}Rating: {%endif%}" data-xaction="/test/star/{{question.id}}">
+    <div class="rating large active fg-dark" data-static="{{stared}}" data-score="{{test.rate|default(0)}}" data-stars="5" data-role="rating" data-show-score="true" data-score-hint="{%if stared%}You have stared,rating: {%else%}Rating: {%endif%}" data-xaction="/test/star/{{test.id}}">
     
     </div>
 
     <div id="disqus_thread"></div>
     <script type="text/javascript">
-        var disqus_shortname = 'sogou-ufo'; // required: replace example with your forum shortname
-
+        var disqus_shortname = 'sogou-ufo'; 
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
