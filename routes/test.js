@@ -94,11 +94,7 @@ router.get('/create', function(req, res, next) {
     }));
 });
 
-router.get('/update/:id', function(req, res, next) {
-
-});
-
-router.get('/show/:id', function(req, res, next) {
+function queryTestInfo(tpl,req,res,next){
     var id = req.param('id');
     return Test.findById(id,function(err,test){
         if(err){
@@ -116,7 +112,7 @@ router.get('/show/:id', function(req, res, next) {
             }
             //FIXME
             return Question.find({},function(err,ques){
-                return res.render('test/show',tplData(req,{
+                return res.render(tpl,tplData(req,{
                     test:test,
                     stared:false,
                     _ques_test:true,
@@ -127,6 +123,18 @@ router.get('/show/:id', function(req, res, next) {
             })
         }
     });
+}
+
+router.get('/edit/:id', function(req, res, next) {
+    var args = Array.prototype.slice.call(arguments);
+    args.unshift('test/create');
+    return queryTestInfo.apply(this,args);
+});
+
+router.get('/show/:id', function(req, res, next) {
+    var args = Array.prototype.slice.call(arguments);
+    args.unshift('test/show');
+    return queryTestInfo.apply(this,args);
 });
 
 router.post('/star/:id', function(req, res) {

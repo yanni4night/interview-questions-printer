@@ -1,6 +1,6 @@
 <nav class="navigation-bar dark">
     <div class="navigation-bar-content">
-        <a href="/" class="element"><span class="icon-grid-view"></span> VIEW TOUCH <sup>1.0</sup></a>
+        <a href="/" class="element"><span class="icon-grid-view"></span> VIEW TOUCH <sup>1.0beta</sup></a>
         <span class="element-divider"></span>
         <a class="pull-menu" href="#"></a>
         <ul class="element-menu">
@@ -51,8 +51,8 @@
             <a class="element brand" href="/question/edit/{{question.id}}"><span class="icon-code" title="Update this question"></span></a>
             {%endif%}
             {%if _ques_test%}
-             <a class="element brand" href="/test/edit/{{question.id}}"><span class="icon-code" title="Update this test"></span></a>
-            <a class="element brand" href="/test/print/{{question.id}}"><span class="icon-printer" title="Print this test"></span></a>
+             <a class="element brand" href="/test/edit/{{test.id}}"><span class="icon-code" title="Update this test"></span></a>
+            <a class="element brand" href="/test/print/{{test.id}}"><span class="icon-printer" title="Print this test"></span></a>
             {%endif%} 
             <span class="element-divider"></span>
             <div class="element input-element">

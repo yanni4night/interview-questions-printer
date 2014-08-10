@@ -24,7 +24,7 @@
     </div>
     {%endif%}
     <fieldset>
-        <legend>{%if question.id%}Update{%else%}Create{%endif%} a new question</legend>
+        <legend>{%if question.id%}Update a question{%else%}Create a new question{%endif%}</legend>
         <label>Name</label>
         <div class="input-control text info-state" data-role="input-control">
             <input type="text" placeholder="type the title of the question" name="name" value="{{question.name|safe}}"/>

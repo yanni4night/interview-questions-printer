@@ -69,7 +69,7 @@
     </div>
     {%endif%}
     <fieldset>
-        <legend>{%if test.id%}Update{%else%}Create{%endif%} a new test</legend>
+        <legend>{%if test.id%}Update a test{%else%}Create a new test{%endif%}</legend>
         <label>Name</label>
         <div class="input-control text info-state" data-role="input-control">
             <input type="text" placeholder="type the title of the test" name="name" value="{{test.name|safe}}"/>
@@ -83,11 +83,19 @@
             <input type="text" placeholder="" id="tags" name="tags" value="{{test.tags}}"/>
             <button class="btn-clear" tabindex="-1" type="button"></button>
         </div>
-        <div id="questions-list" class="listview-outlook" data-role="listview" style="margin-top: 20px">
+        <div id="questions-list" class="listview-outlook" data-role="listview" style="margin: 20px 0">
                 <div class="list-group ">
                     <a href="" class="group-title">Questions</a>
                     <div class="group-content">
-                    
+                    {%for q in questions%}
+<a class="list" href="#" data-id="{{q.id}}">
+    <div class="list-content">
+        <span class="list-title">{{q.name}}</span>
+        <span class="list-subtitle">{{q.author}}: {{q.date|date("Y-m-d")}}</span>
+        <span class="list-remark">{{q.content}}</span>
+    </div>
+</a>
+                    {%endfor%}
                     </div>
                 </div>
             </div>
