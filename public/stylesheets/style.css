@@ -1,1 +1,1 @@
-.topwrapper{width:1000px;margin:0 auto}.topwrapper textarea.body{height:300px}.topwrapper article{white-space:pre-line}a{color:#00B7FF}
+.topwrapper{width:1000px;margin:0 auto}.topwrapper textarea.body{height:300px}.topwrapper article{white-space:pre-line}a{color:#00B7FF}.print-content{page-break-inside:avoid;white-space:pre-line;margin-bottom:100px}.print-content:first-of-type{margin-bottom:40px}button.print{position:fixed;right:0;top:0}q::after,q::before{content:"'"}@media print{button,.metro .silder,.metro .slider .hint{display:none !important}}

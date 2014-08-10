@@ -137,6 +137,12 @@ router.get('/show/:id', function(req, res, next) {
     return queryTestInfo.apply(this,args);
 });
 
+router.get('/print/:id', function(req, res, next) {
+    var args = Array.prototype.slice.call(arguments);
+    args.unshift('test/print');
+    return queryTestInfo.apply(this,args);
+});
+
 router.post('/star/:id', function(req, res) {
     var id = req.param('id');
     var value = +req.param('value');

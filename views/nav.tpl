@@ -68,9 +68,8 @@
                     <span class="icon-cog"></span>
                 </a>
                 <ul class="dropdown-menu place-right" data-role="dropdown">
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Hello</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="/help">Help</a></li>
+                    <li><a href="#" class="about">About</a></li>
                 </ul>
             </div>
             <span class="element-divider place-right"></span>
@@ -80,3 +79,21 @@
         </div>
     </div>
 </nav>
+<script>
+$('.about').click(function(e){
+    e.preventDefault();
+            $.Dialog({
+            shadow: true,
+            overlay: true,
+            icon: '<span class="icon-windows"></span>',
+            title: 'About',
+            width: 500,
+            padding: 10,
+            content: 'Loading...',
+            onShow: function($_dialog) {
+                var $content = $_dialog.children('.content');
+                $content.html('<div class="text-center"><h4>VIEW TOUCH<sup>1.0&beta;</sup></h4><div>Powered by <a href="mailto:yanni4night@gmail.com">yanni4night</a></div><div>Copyright © 2014 yanni4night.com. All Rights Reserved</div></div>');
+            }
+        })
+    });
+</script>

@@ -43,10 +43,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('*', function(req, res, next) {
     var err, username;
 
-    if ('ufo' === req.host || '10.11.202.231' === req.host) {
-        return res.redirect(req.protocol + '://' + config.host + ':' + (app.get('port') || 80) + req.path);
-    }
-
     //jpassport-sp  {username:yinyong@sogou-inc.com,timebefore:2014-07-25T11:07:10.705Z,notonorafter:2014-08-08T11:08:10.705Z,sign:eJwNj8kRADEIw1oCcz8DCf2XtPvzQyON2bfvWps9hDyXp7C0113oKqvrsOm00ZD2emTHFcpi5naC5KZEIN0KB2j6QVCdtVc7/GCQuPf2zNXcdrQeD1nNE5XKS6ggpN1lOuKPljpdjfbfsjF/HHyn0TlMRFveIkhpDk29MhhzKDos9rym+hvN84b1Wgxx/1KnwujsGh0d1f+28AfgpTmM}    ufo.sogou-inc.com   /   连线时段    336 B       
     if (!req.cookies['jpassport-sp']) {
         err = new Error('Not Logined');

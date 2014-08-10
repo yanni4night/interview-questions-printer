@@ -11,3 +11,27 @@
 a {
   color: #00B7FF;
 }
+
+.print-content{
+    &:first-of-type{
+        margin-bottom: 40px;
+    }
+    page-break-inside:avoid;
+    white-space:pre-line;
+    margin-bottom:100px;
+}
+
+button.print{
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+q::after,q::before{
+    content: "'";
+}
+
+@media print {
+    button,.metro .silder,.metro .slider .hint{
+        display: none !important;
+    }
+}
