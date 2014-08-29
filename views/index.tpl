@@ -3,13 +3,13 @@
 {%block content%}
   <div class="carousel margin10 nrm nlm" data-role="carousel" data-period="10000" data-controls="false" data-effect="slide">
     <div class="slide">
-        <h1 class="padding10">What is <q>VIEW TOUCH</q>?</h1>
+        <h1 class="padding10"><q>VIEW TOUCH</q></h1>
         <div class="padding10 subheader">
-            VIEW TOUCH is a questions-collecting system,base on which you can easily create you own test paper.
+                Easy Question
         </div>
 
         <div class="padding10 subheader">
-            Due to different requirement of testing,a instant test paper should be created flexibly ,quickly and conveniently.
+                Easy Test
         </div>
     </div>
  
