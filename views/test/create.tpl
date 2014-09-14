@@ -16,7 +16,12 @@
          onSelect: function (a) {
              $('#questions-list .group-content').append($(a).clone(true));
          },
-    })
+    });
+
+    $('#questions-list .group-content').delegate('a.list','click',function(e){
+        e.preventDefault();
+        $(this).remove();
+    });
 
     $('#btn-cq').click(function(e){
         sd.show();
@@ -101,7 +106,6 @@
             </div>
 
         <input type="submit" value="{%if test.id%}Update{%else%}Create{%endif%}"/>
-        <input type="reset" value="Reset"/>
         <input type="button" id="btn-cq" value="Add question"/>
     </fieldset>
 </form>

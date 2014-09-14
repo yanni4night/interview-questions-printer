@@ -133,8 +133,6 @@
             </div>
         </div> -->
         <input type="submit" value="{%if question.id%}Update{%else%}Create{%endif%}"/>
-        <input type="reset" value="Reset"/>
-        <!-- <input type="button" value="Button"> -->
     </fieldset>
 </form>
 {%endblock%}
