@@ -5,6 +5,7 @@
     <link rel='stylesheet' href='/stylesheets/cssreset-min.css' />
     <link rel='stylesheet' href='/stylesheets/metro-bootstrap.css' />
     <link rel='stylesheet' href='/stylesheets/metro-bootstrap-responsive.css' />
+    <link rel='stylesheet' href='/stylesheets/iconFont.css'/>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/javascripts/jquery.widget.min.js"></script>
